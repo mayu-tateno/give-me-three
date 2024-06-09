@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  frontend:
+    container_name: give-me-three-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    command: yarn dev -p 4000
+    ports:
+      - "8000:4000"
+    volumes:
+      - ./frontend:/app
+    depends_on:
+      - backend
+
+  backend:
+    container_name: give-me-three-backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -b '0.0.0.0'"
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - db
+
+  db:
+    container_name: give-me-three-db
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: give_me_three_development
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
