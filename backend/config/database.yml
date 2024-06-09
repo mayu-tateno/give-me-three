@@ -51,5 +51,5 @@ test:
 production:
   <<: *default
   database: give_me_three_production
-  username: give_me_three
+  username: <%= ENV["GIVE_ME_THREE_USERNAME"] %>
   password: <%= ENV["GIVE_ME_THREE_PASSWORD"] %>
