@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   frontend:
     container_name: give-me-three-frontend
@@ -35,8 +33,6 @@ services:
     environment:
       MYSQL_DATABASE: give_me_three_development
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: root
-      MYSQL_PASSWORD: 
     volumes:
       - mysql_data:/var/lib/mysql
 
